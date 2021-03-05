@@ -1,0 +1,271 @@
+{
+	"info": {
+		"_postman_id": "c3c55bb9-1e1d-4f81-9403-1962883a9f33",
+		"name": "URL Shortener",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All Shortened urls",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api}}",
+					"host": [
+						"{{api}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "All Shortened urls",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}",
+							"host": [
+								"{{api}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "Expect-CT",
+							"value": "max-age=0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "470"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1d6-K2hgmch3JHePKCUkcG93P3UYEKA\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 05 Mar 2021 13:41:37 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"_id\": \"604233a6f2c9ec33907665c4\",\n        \"hash\": \"nzdqIb\",\n        \"shortUrl\": \"https://eofgp.ly/nzdqIb\",\n        \"originalUrl\": \"https://medium.com/@houssemyahiaoui/pwa-part-01-introduction-1cce43a1dec#.ot1bgajd2\",\n        \"createdAt\": \"2021-03-05T13:35:34.938Z\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"604234f3f2c9ec33907665c5\",\n        \"hash\": \"fb8Ygz\",\n        \"shortUrl\": \"https://eofgp.ly/fb8Ygz\",\n        \"originalUrl\": \"https://medium.com/@houssemyahiaoui/pwa-part-01-introduction-1cce43a1dec#.ot1bgajd\",\n        \"createdAt\": \"2021-03-05T13:41:07.687Z\",\n        \"__v\": 0\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Add Short Url",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{api}}?url=https://medium.com/@houssemyahiaoui/pwa-part-01-introduction-1cce43a1dec%23.ot1bgajd2",
+					"host": [
+						"{{api}}"
+					],
+					"query": [
+						{
+							"key": "url",
+							"value": "https://medium.com/@houssemyahiaoui/pwa-part-01-introduction-1cce43a1dec%23.ot1bgajd2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add Short Url",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"url\": \"https://medium.com/@houssemyahiaoui/pwa-part-01-introduction-1cce43a1dec#.ot1bgajd2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}",
+							"host": [
+								"{{api}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "Expect-CT",
+							"value": "max-age=0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "233"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e9-CjsBO03POXXoqtfBE8UpC2mmuhE\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 05 Mar 2021 13:41:07 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"604234f3f2c9ec33907665c5\",\n    \"hash\": \"fb8Ygz\",\n    \"shortUrl\": \"https://eofgp.ly/fb8Ygz\",\n    \"originalUrl\": \"https://medium.com/@houssemyahiaoui/pwa-part-01-introduction-1cce43a1dec#.ot1bgajd\",\n    \"createdAt\": \"2021-03-05T13:41:07.687Z\",\n    \"__v\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "Navigate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api}}/navigate?shorturl=https://eofgp.ly/nzdqIb",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"navigate"
+					],
+					"query": [
+						{
+							"key": "shorturl",
+							"value": "https://eofgp.ly/nzdqIb"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api",
+			"value": "http://localhost:3000"
+		}
+	]
+}

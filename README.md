@@ -32,4 +32,4 @@ To view the OpenAPI spec for this API, use the following url:
 http://localhost:3000/api
 ```
 
-Alternatively, you can import the Postman collectionin located at `/posman.json`
+Alternatively, you can import the Postman collectionin located at `/postman_collection.json`
