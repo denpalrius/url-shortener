@@ -2,16 +2,18 @@ import {
   Injectable,
   InternalServerErrorException,
   Logger,
+  NotFoundException,
   UnprocessableEntityException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ShortUrl, ShortUrlDocument } from './models/urls.model';
 import * as crypto from 'crypto';
-import { exception } from 'console';
 
 @Injectable()
 export class AppService {
+  private readonly baseUrl = 'https://mini.co/';
+
   constructor(
     @InjectModel(ShortUrl.name)
     private shortUrlModel: Model<ShortUrlDocument>,
@@ -31,16 +33,15 @@ export class AppService {
       const existingShortUrl = await this.shortUrlModel
         .findOne({ hash: shorteUrlHash })
         .exec();
-      console.log('existingShortUrl:', existingShortUrl);
       if (existingShortUrl) return existingShortUrl;
 
+      const shortUrl = this.generateShortURL(url, 0, 5);
+
       const newShortUrl = new ShortUrl({
-        hash: this.generateShortURL(url, 0, 5),
+        hash: shortUrl,
         originalUrl: url,
         createdAt: new Date(),
       });
-
-      console.log(newShortUrl);
 
       return new this.shortUrlModel(newShortUrl).save();
     } catch (error) {
@@ -61,5 +62,17 @@ export class AppService {
       .replace(/\//g, '_') // Url safety
       .replace(/\+/g, '-');
     return hash.substring(startIndex, endIndex + 1);
+  }
+
+  async fetchLongUrl(shorturl: string): Promise<string> {
+    const hash = shorturl.trim().replace(this.baseUrl, '');
+
+    const existingShortUrl = await this.shortUrlModel.findOne({ hash }).exec();
+
+    if (existingShortUrl) {
+      return existingShortUrl.hash;
+    } else {
+      throw new NotFoundException('Long url not found');
+    }
   }
 }
