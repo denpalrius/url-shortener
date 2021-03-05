@@ -9,7 +9,6 @@ $ npm install
 ```
 
 ## Running the app
-👉👉 "Please run any of these commmands in order to test the app"
 ```bash
 # development
 $ npm run start
