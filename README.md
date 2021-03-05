@@ -24,7 +24,11 @@ $ npm run start:prod
 
 For the first time running, this will also install an in-memory Mongo DB instance and could take some time on a slow network.
 
-## Documentation
+## Usage/Testing
+You can import the Postman collectionin located at `/postman_collection.json` and use the examples to test the API.
+
+
+Alternatively, you can also engage with te endpoints of this API though a Swagger UI.
 
 To view the OpenAPI spec for this API, use the following url:
 
@@ -32,4 +36,3 @@ To view the OpenAPI spec for this API, use the following url:
 http://localhost:3000/api
 ```
 
-Alternatively, you can import the Postman collectionin located at `/postman_collection.json`
