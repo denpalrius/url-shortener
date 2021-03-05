@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { IsString, MinLength } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsDate, IsString, MinLength } from 'class-validator';
 import { Document } from 'mongoose';
 
 export type ShortUrlDocument = ShortUrl & Document;
@@ -12,19 +13,21 @@ export class ShortUrl {
     }
   }
 
+  @ApiProperty()
   @IsString({})
-  @MinLength(5)
+  @MinLength(6)
   @Prop({ required: true, length: 6 })
-  code: string;
+  hash: string;
 
+  @ApiProperty()
+  @IsString()
   @Prop({ required: true })
   originalUrl: string;
 
+  @ApiProperty()
+  @IsDate()
   @Prop({ required: true })
-  createdAt: string;
-
-  @Prop({ required: true })
-  updatedAt: string;
+  createdAt: Date;
 }
 
 export const ShortUrlSchema = SchemaFactory.createForClass(ShortUrl);
