@@ -14,10 +14,15 @@ export class ShortUrl {
   }
 
   @ApiProperty()
-  @IsString({})
+  @IsString()
   @MinLength(6)
   @Prop({ required: true, length: 6 })
   hash: string;
+
+  @ApiProperty()
+  @IsString()
+  @Prop()
+  shortUrl: string;
 
   @ApiProperty()
   @IsString()

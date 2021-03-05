@@ -12,7 +12,7 @@ import * as crypto from 'crypto';
 
 @Injectable()
 export class AppService {
-  private readonly baseUrl = 'https://mini.co/';
+  private readonly baseUrl = 'https://eofgp.ly/';
 
   constructor(
     @InjectModel(ShortUrl.name)
@@ -27,52 +27,54 @@ export class AppService {
     try {
       if (!url) throw new UnprocessableEntityException('Invalid url');
 
-      // Look for existing url and return it
-      const shorteUrlHash = this.generateShortURL(url, 0, 5);
+      // Look for existing url and return it if found
+      const shorteUrlHash = this.shortenURL(url);
 
       const existingShortUrl = await this.shortUrlModel
         .findOne({ hash: shorteUrlHash })
         .exec();
       if (existingShortUrl) return existingShortUrl;
 
-      const shortUrl = this.generateShortURL(url, 0, 5);
+      const shortUrlHash = this.shortenURL(url);
 
       const newShortUrl = new ShortUrl({
-        hash: shortUrl,
+        hash: shortUrlHash,
+        shortUrl: this.baseUrl + shortUrlHash,
         originalUrl: url,
         createdAt: new Date(),
       });
 
-      return new this.shortUrlModel(newShortUrl).save();
+      return await new this.shortUrlModel(newShortUrl).save();
     } catch (error) {
       Logger.log(error);
       throw new InternalServerErrorException('Error generating shortened url.');
     }
   }
 
-  private generateShortURL(
-    longURL: crypto.BinaryLike,
-    startIndex: number,
-    endIndex: number,
-  ): string {
-    const hash = crypto
+  private shortenURL(longURL: crypto.BinaryLike): string {
+    const start = 0;
+    const end = 6;
+
+    return crypto
       .createHash('md5')
       .update(longURL)
       .digest('base64') // 64⁶ unique urls
       .replace(/\//g, '_') // Url safety
-      .replace(/\+/g, '-');
-    return hash.substring(startIndex, endIndex + 1);
+      .replace(/\+/g, '-')
+      .substring(start, end);
   }
 
-  async fetchLongUrl(shorturl: string): Promise<string> {
-    const hash = shorturl.trim().replace(this.baseUrl, '');
+  async fetchUrlData(shorturl: string): Promise<ShortUrl> {
+    if (!shorturl) {
+      throw new UnprocessableEntityException('Invalid short url');
+    }
 
+    const hash = shorturl.trim().replace(this.baseUrl, '');
     const existingShortUrl = await this.shortUrlModel.findOne({ hash }).exec();
 
-    if (existingShortUrl) {
-      return existingShortUrl.hash;
-    } else {
-      throw new NotFoundException('Long url not found');
+    if (!existingShortUrl) {
+      throw new NotFoundException('Short url not found');
     }
+    return existingShortUrl;
   }
 }
